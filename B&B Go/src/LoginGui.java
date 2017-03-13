@@ -2,18 +2,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 public class LoginGui extends JFrame implements ActionListener{
 
 	JButton loginButton = new JButton("Login");
 	JButton clearButton = new JButton("Clear");
 	
+	JLabel usernameLabel = new JLabel("Username:");
+	JLabel passwordLabel = new JLabel("Password:");
+	
 	JTextField usernameField = new JTextField(20);
-	JTextField passwordField = new JTextField(20);
+	JPasswordField passwordField = new JPasswordField(20);
 	
 	public LoginGui(){
 		
-		JLabel usernameLabel = new JLabel("Username:");
-		JLabel passwordLabel = new JLabel("Password:");
+		
 		
 		JLabel textLabel = new JLabel("B&B Go");
 		textLabel.setForeground(Color.BLUE);
@@ -26,6 +29,9 @@ public class LoginGui extends JFrame implements ActionListener{
 		JPanel passwordPanel = new JPanel();
 		JPanel buttonPanel = new JPanel();
 		JPanel textPanel = new JPanel();
+		
+		loginButton.addActionListener(this);
+		clearButton.addActionListener(this);
 		
 		textPanel.add(textLabel);
 		
@@ -54,7 +60,29 @@ public class LoginGui extends JFrame implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent e) {
-		
+		if(e.getSource()==clearButton){
+			usernameField.setText(null);
+			passwordField.setText(null);
+			
+		}else if(e.getSource()==loginButton){
+			String textUsername = usernameField.getText();
+			String textPassword = passwordField.getText();
+			
+			if(textUsername.equals("root") && textPassword.equals("root")){
+				new MainMenuGui();
+				this.dispose();
+				
+			}if(!"root".equals(textUsername) || !"root".equals(textPassword) ){
+				
+				 JOptionPane.showMessageDialog(null, "Username or password incorrect, please try again");
+				 usernameField.setText(null);
+				 passwordField.setText(null);
+				 
+			}
+			
+			
+			
+		}
 		
 	}
 	
